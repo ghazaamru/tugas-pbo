@@ -1,0 +1,11 @@
+# Compiled Java Class Files
+*.class
+
+# IDE & Editor Configurations
+.idea/
+.vscode/
+*.iml
+
+# OS generated files
+Thumbs.db
+[Dd]esktop.ini

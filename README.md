@@ -1,392 +1,175 @@
 # Aplikasi Nilai Mahasiswa
 
-Aplikasi sederhana berbasis **Java Console** untuk mengelola data nilai mahasiswa. Project ini dibuat sebagai tugas mata kuliah **Object-Oriented Programming (OOP)** dengan menerapkan konsep **Array of Objects** serta konsep dasar OOP.
+Aplikasi berbasis **Java Console** untuk mengelola data nilai mahasiswa. Proyek ini dibuat sebagai tugas mata kuliah **Object-Oriented Programming (OOP)** dengan menerapkan konsep **Array of Objects** serta prinsip dasar OOP.
 
-## Fitur
+---
 
-Aplikasi memiliki beberapa fitur utama:
+## 📌 Fitur Aplikasi
 
-* Menambahkan data mahasiswa
-* Menampilkan seluruh data mahasiswa
-* Mencari mahasiswa berdasarkan NIM
-* Menghitung rata-rata nilai mahasiswa
-* Menampilkan mahasiswa dengan nilai tertinggi
-* Keluar dari aplikasi
+* ➕ **Tambah Mahasiswa**: Menginput NIM, nama, dan nilai mahasiswa ke dalam array objek.
+* 📋 **Tampilkan Semua Data**: Menampilkan daftar seluruh mahasiswa dalam format tabel rapi.
+* 🔍 **Cari Mahasiswa**: Mencari data mahasiswa secara spesifik berdasarkan NIM.
+* 📊 **Hitung Rata-rata**: Menghitung rata-rata nilai dari seluruh mahasiswa yang tersimpan.
+* 🏆 **Nilai Tertinggi**: Menampilkan data mahasiswa yang memperoleh nilai tertinggi.
+* 🚪 **Keluar**: Menutup aplikasi.
 
-## Konsep yang Diterapkan
+---
 
-Project ini menerapkan beberapa konsep dasar OOP:
+## 💡 Konsep OOP yang Diterapkan
+
+| Konsep | Implementasi | Penjelasan |
+| :--- | :--- | :--- |
+| **Class & Object** | `Mahasiswa`, `Kelas`, `Main` | `Mahasiswa` sebagai cetak biru (*blueprint*) data, diinstansiasi menjadi objek menggunakan operator `new`. |
+| **Encapsulation** | Atribut `private` + Getter | Atribut `nim`, `nama`, dan `nilai` dibungkus secara `private` dan diakses melalui method getter. |
+| **Array of Objects** | `Mahasiswa[] daftarMahasiswa` | Menggunakan array bertipe objek `Mahasiswa` dengan kapasitas tertentu untuk menampung banyak data. |
+| **Modular Method** | `tambahMahasiswa()`, `hitungRataRata()`, dll. | Memisahkan tanggung jawab logika pemrosesan data ke dalam method-method pada class `Kelas`. |
 
 ### 1. Class dan Object
-
-Class `Mahasiswa` digunakan sebagai blueprint untuk membuat objek mahasiswa.
-
+Class `Mahasiswa` digunakan sebagai cetak biru untuk membuat objek mahasiswa:
 ```java
 Mahasiswa mahasiswa = new Mahasiswa(nim, nama, nilai);
 ```
 
 ### 2. Encapsulation
-
-Data mahasiswa dibuat sebagai atribut `private` dan diakses menggunakan method getter.
-
+Atribut pada class `Mahasiswa` dibuat `private` untuk keamanan data, dan dibaca melalui method getter:
 ```java
-private String nim;
-private String nama;
-private double nilai;
-```
+public class Mahasiswa {
+    private String nim;
+    private String nama;
+    private double nilai;
 
-### 3. Array of Objects
-
-Array digunakan untuk menyimpan beberapa objek `Mahasiswa`.
-
-```java
-private Mahasiswa[] daftarMahasiswa;
-```
-
-Array dibuat dengan kapasitas tertentu:
-
-```java
-daftarMahasiswa = new Mahasiswa[kapasitas];
-```
-
-Setiap elemen array dapat menyimpan objek `Mahasiswa`.
-
-```java
-daftarMahasiswa[jumlahMahasiswa] = mahasiswa;
-```
-
-### 4. Method
-
-Program menggunakan beberapa method untuk mengelola data, seperti:
-
-```text
-tambahMahasiswa()
-tampilkanSemua()
-cariMahasiswa()
-hitungRataRata()
-cariNilaiTertinggi()
-```
-
----
-
-# Struktur Folder
-
-Struktur folder project dibuat sederhana agar mudah dipahami dan dijalankan.
-
-```text
-aplikasi-nilai-mahasiswa/
-│
-├── src/
-│   │
-│   ├── Main.java
-│   ├── Mahasiswa.java
-│   └── Kelas.java
-│
-├── .gitignore
-├── README.md
-└── LICENSE
-```
-
-## Penjelasan Struktur Folder
-
-### `aplikasi-nilai-mahasiswa/`
-
-Merupakan **root folder** atau folder utama project.
-
-Semua file project berada di dalam folder ini.
-
-### `src/`
-
-Folder `src` (*source*) digunakan untuk menyimpan seluruh source code Java.
-
-```text
-src/
-├── Main.java
-├── Mahasiswa.java
-└── Kelas.java
-```
-
-### `src/Main.java`
-
-Berfungsi sebagai **entry point** aplikasi.
-
-File ini berisi:
-
-* Method `main()`
-* Menu aplikasi
-* Input dari pengguna
-* Pemanggilan method dari class `Kelas`
-
-Contoh:
-
-```java
-public static void main(String[] args) {
-    // program utama
+    public String getNim() { return nim; }
+    public String getNama() { return nama; }
+    public double getNilai() { return nilai; }
 }
 ```
 
-### `src/Mahasiswa.java`
-
-Berisi class `Mahasiswa`.
-
-Class ini digunakan untuk merepresentasikan satu objek mahasiswa.
-
-Struktur datanya:
-
-```text
-Mahasiswa
-├── nim
-├── nama
-└── nilai
-```
-
-Contoh objek:
-
+### 3. Array of Objects
+Class `Kelas` mengelola kumpulan objek `Mahasiswa` menggunakan array:
 ```java
-Mahasiswa mahasiswa =
-        new Mahasiswa("23001", "Budi", 85);
-```
-
-### `src/Kelas.java`
-
-Berisi class `Kelas`.
-
-Class ini bertugas mengelola kumpulan objek mahasiswa menggunakan array.
-
-Array utama yang digunakan:
-
-```java
+// Alokasi memori array bertipe Mahasiswa
 private Mahasiswa[] daftarMahasiswa;
+daftarMahasiswa = new Mahasiswa[kapasitas];
+
+// Menyimpan objek mahasiswa ke dalam elemen array
+daftarMahasiswa[jumlahMahasiswa] = mahasiswa;
 ```
-
-Class ini memiliki beberapa method:
-
-```text
-tambahMahasiswa()
-tampilkanSemua()
-cariMahasiswa()
-hitungRataRata()
-cariNilaiTertinggi()
-```
-
-### `README.md`
-
-File dokumentasi project.
-
-Berisi:
-
-* Deskripsi project
-* Fitur aplikasi
-* Konsep OOP
-* Struktur folder
-* Cara menjalankan aplikasi
-* Contoh penggunaan
-
-### `.gitignore`
-
-Digunakan untuk menentukan file atau folder yang **tidak perlu diunggah ke repository Git**.
-
-Untuk project Java sederhana, contoh `.gitignore`:
-
-```gitignore
-# Compiled Java files
-*.class
-
-# IDE files
-.idea/
-.vscode/
-*.iml
-
-# Build folders
-out/
-build/
-target/
-```
-
-### `LICENSE`
-
-Berisi lisensi project.
-
-Jika tugas tidak membutuhkan lisensi, file ini sebenarnya **opsional** dan dapat dihilangkan.
 
 ---
 
-# Struktur Project yang Direkomendasikan
+## 🏗 Hubungan Antar Class (Class Diagram)
 
-Jika tugas hanya membutuhkan source code dan README, struktur paling sederhana yang direkomendasikan adalah:
+Relasi antar class dalam proyek dimodelkan dalam diagram berikut:
+
+```mermaid
+classDiagram
+    class Main {
+        +main(String[] args)$ void
+    }
+
+    class Kelas {
+        -Mahasiswa[] daftarMahasiswa
+        -int jumlahMahasiswa
+        +Kelas(int kapasitas)
+        +tambahMahasiswa(Mahasiswa mahasiswa) boolean
+        +tampilkanSemua() void
+        +cariMahasiswa(String nim) Mahasiswa
+        +hitungRataRata() double
+        +cariNilaiTertinggi() Mahasiswa
+    }
+
+    class Mahasiswa {
+        -String nim
+        -String nama
+        -double nilai
+        +Mahasiswa(String nim, String nama, double nilai)
+        +getNim() String
+        +getNama() String
+        +getNilai() double
+        +tampilkanData() void
+    }
+
+    Main ..> Kelas : menggunakan
+    Kelas "1" o-- "0..*" Mahasiswa : mengelola (Array of Objects)
+```
+
+---
+
+## 🔄 Alur Program (Workflow)
+
+```mermaid
+flowchart TD
+    Start(["Mulai Program"]) --> Menu["Tampilkan Menu Utama"]
+    Menu --> Input["User Memilih Menu (1-6)"]
+    
+    Input --> Choice{Pilihan Menu}
+    Choice -- "1" --> Tambah["Input NIM, Nama, Nilai<br/>Instansiasi Mahasiswa<br/>Simpan ke Array"]
+    Choice -- "2" --> Tampil["Tampilkan Tabel Seluruh Mahasiswa"]
+    Choice -- "3" --> Cari["Input NIM<br/>Iterasi Array & Tampilkan Hasil"]
+    Choice -- "4" --> Hitung["Kalkulasi Rata-rata Nilai Mahasiswa"]
+    Choice -- "5" --> Max["Cari Mahasiswa Nilai Tertinggi"]
+    Choice -- "6" --> Selesai(["Keluar / Program Selesai"])
+    Choice -- "Lainnya" --> Invalid["Tampilkan: Pilihan tidak valid"]
+
+    Tambah --> Menu
+    Tampil --> Menu
+    Cari --> Menu
+    Hitung --> Menu
+    Max --> Menu
+    Invalid --> Menu
+```
+
+---
+
+## 📁 Struktur Proyek
 
 ```text
-aplikasi-nilai-mahasiswa/
-│
+tugas-pbo/
 ├── src/
-│   ├── Main.java
-│   ├── Mahasiswa.java
-│   └── Kelas.java
-│
-├── README.md
-└── .gitignore
+│   ├── Main.java         # Titik masuk program (entry point) & menu konsol
+│   ├── Mahasiswa.java    # Model representasi data mahasiswa
+│   └── Kelas.java        # Pengelola array of objects & logika kalkulasi nilai
+├── .gitignore            # File aturan pengabaian Git
+└── README.md             # Dokumentasi proyek
 ```
-
-Struktur ini sudah cukup untuk project tugas OOP sederhana.
 
 ---
 
-# Hubungan Antar Class
+## 🚀 Cara Menjalankan Aplikasi
 
-Hubungan antar class dalam project:
-
-```text
-                    ┌──────────────┐
-                    │     Main     │
-                    └──────┬───────┘
-                           │
-                           │ menggunakan
-                           ▼
-                    ┌──────────────┐
-                    │    Kelas     │
-                    └──────┬───────┘
-                           │
-                           │ memiliki
-                           ▼
-                  ┌──────────────────┐
-                  │ Mahasiswa[]      │
-                  │ daftarMahasiswa  │
-                  └────────┬─────────┘
-                           │
-                           │ menyimpan
-                           ▼
-                    ┌──────────────┐
-                    │  Mahasiswa   │
-                    └──────────────┘
-```
-
-`Main` menggunakan class `Kelas` untuk menjalankan operasi aplikasi.
-
-`Kelas` memiliki array `Mahasiswa[]` untuk menyimpan beberapa objek `Mahasiswa`.
-
-Dengan demikian, konsep **Array of Objects** terlihat secara langsung dalam project.
-
----
-
-# Cara Membuat Struktur Folder
-
-Jika membuat project secara manual, buat folder dengan struktur berikut:
-
-```text
-aplikasi-nilai-mahasiswa
-│
-├── src
-│   ├── Main.java
-│   ├── Mahasiswa.java
-│   └── Kelas.java
-│
-├── README.md
-└── .gitignore
-```
-
-Kemudian masukkan source code masing-masing class ke file yang sesuai.
-
----
-
-# Cara Menjalankan
-
-## Persyaratan
-
-Pastikan komputer sudah memiliki:
-
-* Java JDK
-* Terminal / Command Prompt
-* IDE seperti IntelliJ IDEA, NetBeans, atau Visual Studio Code (opsional)
-
-Cek instalasi Java:
-
+### Prasyarat
+Pastikan komputer telah terinstal Java JDK:
 ```bash
 java --version
-```
-
-Cek compiler Java:
-
-```bash
 javac --version
 ```
 
-## Menjalankan melalui Terminal
+### Melalui Terminal / Command Prompt
+1. Navigasi ke direktori root proyek:
+   ```bash
+   cd "C:\Ghaza Amru\tugas-pbo-ghaza"
+   ```
+2. Kompilasi seluruh file Java:
+   ```bash
+   javac src/*.java
+   ```
+3. Jalankan program:
+   ```bash
+   java -cp src Main
+   ```
 
-Masuk ke folder `src`:
+*(Alternatif: masuk ke folder `src` dengan `cd src`, compile dengan `javac *.java`, dan jalankan dengan `java Main`)*
 
-```bash
-cd src
-```
-
-Compile semua file Java:
-
-```bash
-javac *.java
-```
-
-Jika proses compile berhasil, jalankan:
-
-```bash
-java Main
-```
-
----
-
-# Menjalankan melalui IDE
-
-Project dapat dibuka menggunakan IDE seperti IntelliJ IDEA, NetBeans, atau Visual Studio Code.
-
-Pastikan struktur file tetap seperti berikut:
-
-```text
-aplikasi-nilai-mahasiswa/
-└── src/
-    ├── Main.java
-    ├── Mahasiswa.java
-    └── Kelas.java
-```
-
-Kemudian jalankan file:
-
-```text
-Main.java
-```
-
-karena file tersebut berisi method `main()` sebagai titik awal program.
+### Melalui IDE (VS Code, IntelliJ IDEA, NetBeans)
+1. Buka folder `tugas-pbo` pada IDE Anda.
+2. Pastikan folder `src/` dikenali sebagai *source folder*.
+3. Buka file `src/Main.java` dan pilih opsi **Run**.
 
 ---
 
-# Alur Program
+## 🖥 Contoh Tampilan Aplikasi
 
-```text
-User
- │
- ▼
-Main.java
- │
- ├── Tambah Mahasiswa
- │       │
- │       ▼
- │   Membuat Object Mahasiswa
- │       │
- │       ▼
- │   Menyimpan ke Mahasiswa[]
- │
- ├── Tampilkan Data
- │
- ├── Cari Mahasiswa
- │
- ├── Hitung Rata-rata
- │
- └── Nilai Tertinggi
-```
-
----
-
-# Contoh Penggunaan
-
-Ketika program dijalankan:
-
+### Menu Konsol
 ```text
 ====================================
      APLIKASI NILAI MAHASISWA
@@ -398,12 +181,12 @@ Ketika program dijalankan:
 5. Nilai Tertinggi
 6. Keluar
 ====================================
-Pilih menu:
+Pilih menu: 
 ```
 
-Contoh menambahkan data:
-
+### Menambahkan Data
 ```text
+--- Tambah Mahasiswa ---
 NIM   : 23001
 Nama  : Budi
 Nilai : 85
@@ -411,8 +194,7 @@ Nilai : 85
 Data berhasil ditambahkan.
 ```
 
-Contoh menampilkan data:
-
+### Menampilkan Data Tabel
 ```text
 ==============================================
               DATA MAHASISWA
@@ -425,66 +207,19 @@ No    NIM          Nama                 Nilai
 ==============================================
 ```
 
----
+### Contoh Perhitungan Statistik
+Jika terdapat 3 data mahasiswa:
+* Budi = `85`
+* Citra = `90`
+* Andi = `78`
 
-# Contoh Perhitungan
-
-Jika terdapat tiga mahasiswa:
-
-```text
-Budi  = 85
-Citra = 90
-Andi  = 78
-```
-
-Maka rata-rata:
-
-```text
-(85 + 90 + 78) / 3
-= 253 / 3
-= 84.33
-```
-
-Nilai tertinggi:
-
-```text
-90
-```
+Maka perhitungannya:
+* **Rata-rata:** `(85 + 90 + 78) / 3 = 253 / 3 = 84.33`
+* **Nilai Tertinggi:** `Citra` dengan nilai `90.00`
 
 ---
 
-# Tujuan Project
+## 👤 Author
 
-Project ini dibuat untuk menunjukkan penerapan konsep **Array dalam pemrograman berorientasi objek**, khususnya penggunaan **array yang menyimpan objek dari sebuah class**.
-
-Konsep utama yang ditunjukkan:
-
-```text
-Class
-  ↓
-Object
-  ↓
-Array of Objects
-  ↓
-Method untuk mengelola Object
-```
-
-## Ringkasan Konsep
-
-| Konsep        | Implementasi                                 |
-| ------------- | -------------------------------------------- |
-| Class         | `Mahasiswa`, `Kelas`, `Main`                 |
-| Object        | `new Mahasiswa(...)`                         |
-| Encapsulation | Atribut `private` + getter                   |
-| Array         | `Mahasiswa[]`                                |
-| Method        | `tambahMahasiswa()`, `cariMahasiswa()`, dll. |
-| Looping       | `for` untuk mengolah array                   |
-| Conditional   | `if` dan `switch`                            |
-
----
-
-# Author
-
-**Ghaza Amru Seftyan**
-
-Project tugas mata kuliah **Object-Oriented Programming (OOP)**.
+* **Ghaza Amru Seftyan**
+* Tugas Mata Kuliah: **Object-Oriented Programming (OOP)**
